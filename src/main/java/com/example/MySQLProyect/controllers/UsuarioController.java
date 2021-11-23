@@ -3,6 +3,8 @@ package com.example.MySQLProyect.controllers;
 import com.example.MySQLProyect.models.UsuarioModel;
 import com.example.MySQLProyect.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -30,17 +32,16 @@ public class UsuarioController {
     }
 
     @GetMapping("/query")
-    public ArrayList<UsuarioModel> obtenerUsuarioPorPrioridad(@RequestParam("prioridad") Integer prioridad){
+    public ArrayList<UsuarioModel> obtenerUsuariosPorPrioridad(@RequestParam("prioridad") Integer prioridad){
         return usuarioService.obtenerPorPrioridad(prioridad);
     }
 
     @DeleteMapping(path="/{id}")
-    public String eliminarPorId(@PathVariable("id") Long id){
-        boolean ok=usuarioService.eliminarUsuario(id);
-        if(ok){
-            return "Se eliminó el usuario con id "+id;
-        }
-        return "No pudo eliminar el usuario con id "+id;
+    public ResponseEntity<String> eliminarPorId(@PathVariable("id") Long id){
+        if(usuarioService.eliminarUsuario(id))
+            return new ResponseEntity<String>("Usuario eliminado", HttpStatus.OK);
+        return new ResponseEntity<String>("Usuario no encontrado", HttpStatus.BAD_REQUEST);
+
     }
 
 }
