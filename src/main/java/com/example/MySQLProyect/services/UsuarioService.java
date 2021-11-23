@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class UsuarioService {
@@ -56,6 +57,6 @@ public class UsuarioService {
 
     public ArrayList<UsuarioModel> listaMaximaPrioridad(){
         ArrayList<UsuarioModel> listaUsuarios=(ArrayList<UsuarioModel>) usuarioRepository.findAll();
-        return (ArrayList<UsuarioModel>) listaUsuarios.stream().filter(x->x.getPrioridad()<3);
+        return (ArrayList<UsuarioModel>) listaUsuarios.stream().filter(x->x.getPrioridad()>3).collect(Collectors.toList());
     }
 }

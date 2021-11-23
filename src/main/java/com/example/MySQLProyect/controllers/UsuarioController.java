@@ -55,7 +55,7 @@ public class UsuarioController {
             return new ResponseEntity<UsuarioModel>(usuario, HttpStatus.OK);
         return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
     }
-
+    //Lista de usuarios con una prioridad mayor a 3
     @GetMapping("/maxPrioridad")
     public ArrayList<UsuarioModel> prioridadUsuarioList(){
         return usuarioService.listaMaximaPrioridad();
