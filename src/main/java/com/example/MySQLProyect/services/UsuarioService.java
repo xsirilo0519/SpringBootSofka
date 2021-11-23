@@ -47,16 +47,16 @@ public class UsuarioService {
     public UsuarioModel actualizarEmailById(Long id,String email){
         Optional<UsuarioModel> usuario=null;
         try {
-            usuario = usuarioRepository.findById(id);
+            usuario = obtenerPorId(id);
             usuario.get().setEmail(email);
-            return usuarioRepository.save(usuario.get());
+            return guardarUsuario(usuario.get());
         } catch (Exception e) {
             return null;
         }
     }
 
     public ArrayList<UsuarioModel> listaMaximaPrioridad(){
-        ArrayList<UsuarioModel> listaUsuarios=(ArrayList<UsuarioModel>) usuarioRepository.findAll();
+        ArrayList<UsuarioModel> listaUsuarios=obtenerUsuarios();
         return (ArrayList<UsuarioModel>) listaUsuarios.stream().filter(x->x.getPrioridad()>3).collect(Collectors.toList());
     }
 }
