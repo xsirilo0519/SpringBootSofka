@@ -41,7 +41,10 @@ public class UsuarioController {
         if(usuarioService.eliminarUsuario(id))
             return new ResponseEntity<String>("Usuario eliminado", HttpStatus.OK);
         return new ResponseEntity<String>("Usuario no encontrado", HttpStatus.BAD_REQUEST);
-
     }
-
+    //Busqueda por prioridad y nombre
+    @GetMapping(path = "Buscar/{prioridad}/{nombre}")
+    public ArrayList<UsuarioModel> obtenerUsuariosPorPrioridad(@PathVariable("prioridad")Integer prioridad,@PathVariable("nombre")String nombre){
+        return usuarioService.obtenerPorPrioridadYNombre(prioridad,nombre);
+    }
 }

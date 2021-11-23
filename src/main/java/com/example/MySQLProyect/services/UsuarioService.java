@@ -39,5 +39,8 @@ public class UsuarioService {
             return false;
         }
     }
+    public ArrayList<UsuarioModel> obtenerPorPrioridadYNombre(Integer prioridad,String nombre){
+        return usuarioRepository.findByPrioridadAndNombre(prioridad,nombre);
+    }
 
 }
