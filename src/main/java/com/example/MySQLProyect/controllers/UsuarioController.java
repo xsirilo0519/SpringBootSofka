@@ -16,12 +16,12 @@ public class UsuarioController {
     @Autowired
     UsuarioService usuarioService;
 
-    @GetMapping("/list")
+    @GetMapping("/listaDeUsuarios")
     public ArrayList<UsuarioModel> obtenerUsuarios(){
         return usuarioService.obtenerUsuarios();
     }
 
-    @PostMapping("/create")
+    @PostMapping("/agregar")
     public UsuarioModel guardarUsuario(@RequestBody UsuarioModel usuario) {
         return usuarioService.guardarUsuario(usuario);
     }
@@ -43,8 +43,16 @@ public class UsuarioController {
         return new ResponseEntity<String>("Usuario no encontrado", HttpStatus.BAD_REQUEST);
     }
     //Busqueda por prioridad y nombre
-    @GetMapping(path = "Buscar/{prioridad}/{nombre}")
+    @GetMapping(path = "buscar/{prioridad}/{nombre}")
     public ArrayList<UsuarioModel> obtenerUsuariosPorPrioridad(@PathVariable("prioridad")Integer prioridad,@PathVariable("nombre")String nombre){
         return usuarioService.obtenerPorPrioridadYNombre(prioridad,nombre);
+    }
+    //Actualizar email de un usuario 
+    @PatchMapping("/actualizar/{id}/{email}")
+    public ResponseEntity<UsuarioModel> actualizarEmailById(@PathVariable Long id, @PathVariable String email) {
+        UsuarioModel usuario=usuarioService.actualizarEmailById(id,email);
+        if(usuario instanceof UsuarioModel)
+            return new ResponseEntity<UsuarioModel>(usuario, HttpStatus.OK);
+        return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
     }
 }

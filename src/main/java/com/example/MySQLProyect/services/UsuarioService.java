@@ -43,4 +43,15 @@ public class UsuarioService {
         return usuarioRepository.findByPrioridadAndNombre(prioridad,nombre);
     }
 
+    public UsuarioModel actualizarEmailById(Long id,String email){
+        Optional<UsuarioModel> usuario=null;
+        try {
+            usuario = usuarioRepository.findById(id);
+            usuario.get().setEmail(email);
+            System.out.println("hola");
+            return usuarioRepository.save(usuario.get());
+        } catch (Exception e) {
+            return null;
+        }
+    }
 }
