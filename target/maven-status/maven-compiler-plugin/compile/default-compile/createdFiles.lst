@@ -1,0 +1,7 @@
+com\example\MySQLProyect\models\UsuarioModel.class
+com\example\MySQLProyect\MySqlProyectApplication.class
+com\example\MySQLProyect\repositories\UsuarioRepository.class
+com\example\MySQLProyect\services\UsuarioService.class
+com\example\MySQLProyect\hola.class
+com\example\MySQLProyect\controllers\UsuarioController.class
+com\example\MySQLProyect\ServletInitializer.class
