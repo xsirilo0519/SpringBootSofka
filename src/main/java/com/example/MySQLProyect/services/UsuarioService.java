@@ -48,10 +48,14 @@ public class UsuarioService {
         try {
             usuario = usuarioRepository.findById(id);
             usuario.get().setEmail(email);
-            System.out.println("hola");
             return usuarioRepository.save(usuario.get());
         } catch (Exception e) {
             return null;
         }
+    }
+
+    public ArrayList<UsuarioModel> listaMaximaPrioridad(){
+        ArrayList<UsuarioModel> listaUsuarios=(ArrayList<UsuarioModel>) usuarioRepository.findAll();
+        return (ArrayList<UsuarioModel>) listaUsuarios.stream().filter(x->x.getPrioridad()<3);
     }
 }

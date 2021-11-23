@@ -47,7 +47,7 @@ public class UsuarioController {
     public ArrayList<UsuarioModel> obtenerUsuariosPorPrioridad(@PathVariable("prioridad")Integer prioridad,@PathVariable("nombre")String nombre){
         return usuarioService.obtenerPorPrioridadYNombre(prioridad,nombre);
     }
-    //Actualizar email de un usuario 
+    //Actualizar email de un usuario con Patch
     @PatchMapping("/actualizar/{id}/{email}")
     public ResponseEntity<UsuarioModel> actualizarEmailById(@PathVariable Long id, @PathVariable String email) {
         UsuarioModel usuario=usuarioService.actualizarEmailById(id,email);
@@ -55,4 +55,11 @@ public class UsuarioController {
             return new ResponseEntity<UsuarioModel>(usuario, HttpStatus.OK);
         return new ResponseEntity<>(null, HttpStatus.BAD_REQUEST);
     }
+
+    @GetMapping("/maxPrioridad")
+    public ArrayList<UsuarioModel> prioridadUsuarioList(){
+        return usuarioService.listaMaximaPrioridad();
+    }
+
+
 }

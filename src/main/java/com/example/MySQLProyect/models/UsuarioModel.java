@@ -9,9 +9,11 @@ public class UsuarioModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(unique=true, nullable = false)
     private Long id;
-    @Column(name = "Nombre_de_usuario",updatable = true)
+    @Column(nullable = false)
     private String nombre;
+    @Column(nullable = false)
     private String  email;
+    @Column(nullable = false)
     private Integer prioridad;
 
     public Long getId() {
